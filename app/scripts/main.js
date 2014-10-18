@@ -1,17 +1,11 @@
 require.config({
     paths: {
-        jquery: '../bower_components/jquery/jquery',
-        bootstrap: '../bower_components/bootstrap/dist/js/bootstrap'
+        jquery: '../bower_components/jquery/jquery'
     },
-    shim: {
-        bootstrap: {
-            deps: ['jquery'],
-            exports: 'jquery'
-        }
-    }
+    shim: {}
 });
 
-require(['app', 'jquery', 'bootstrap'], function (app, $) {
+require(['app', 'jquery'], function(app, $) {
     'use strict';
     // use app here
     console.log(app);
