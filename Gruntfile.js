@@ -41,7 +41,7 @@ module.exports = function(grunt) {
                 tasks: ['jshint:test']
             },
             compass: {
-                files: ['<%= yeoman.app %>**/*.{scss,sass}'],
+                files: ['<%= yeoman.app %>/**/*.{scss,sass}'],
                 tasks: ['compass:server']
             },
             livereload: {
@@ -133,9 +133,6 @@ module.exports = function(grunt) {
                 'test/spec/{,*/}*.js'
             ],
             test: {
-                options: {
-                    jshintrc: 'test/.jshintrc'
-                },
                 src: ['test/spec/{,*/}*.js']
             }
         },
