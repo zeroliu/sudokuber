@@ -2,16 +2,25 @@
 // variables
 // ************************************
 $grid-container-width: 500px;
-$grid-cell-dist: 10px;
-$grid-cell-width: ($grid-container-width - $grid-cell-dist) / 3 - $grid-cell-dist;
-$squard-cell-dist: 5px;
-$squard-cell-width: ($grid-cell-width + $squard-cell-dist) / 3 - $squard-cell-dist;
+$grid-cell-padding: 10px;
+$grid-cell-width: ($grid-container-width - $grid-cell-padding) / 3 - $grid-cell-padding;
+$squard-cell-padding: 5px;
+$squard-cell-width: ($grid-cell-width + $squard-cell-padding) / 3 - $squard-cell-padding;
+$number-container-width: $grid-container-width * 0.8;
+$button-padding: 10px;
+$button-width: ($number-container-width - $button-padding) / 5 - $button-padding;
+$number-container-height: $button-width * 2 + $button-padding * 3;
 
 $mobile-grid-container-width: 280px;
-$mobile-grid-cell-dist: 5px;
-$mobile-grid-cell-width: ($mobile-grid-container-width - $mobile-grid-cell-dist) / 3 - $mobile-grid-cell-dist;
-$mobile-squard-cell-dist: 3px;
-$mobile-squard-cell-width: ($mobile-grid-cell-width + $mobile-squard-cell-dist) / 3 - $mobile-squard-cell-dist;
+$mobile-grid-cell-padding: 5px;
+$mobile-grid-cell-width: ($mobile-grid-container-width - $mobile-grid-cell-padding) / 3 - $mobile-grid-cell-padding;
+$mobile-squard-cell-padding: 3px;
+$mobile-squard-cell-width: ($mobile-grid-cell-width + $mobile-squard-cell-padding) / 3 - $mobile-squard-cell-padding;
+$mobile-game-button-padding: 3px;
+$mobile-number-container-width: $mobile-grid-container-width * 0.8;
+$mobile-button-padding: 6px;
+$mobile-button-width: ($mobile-number-container-width - $mobile-button-padding) / 5 - $mobile-button-padding;
+$mobile-number-container-height: $mobile-button-width * 2 + $mobile-button-padding * 3;
 
 // ************************************
 // mixin
@@ -47,12 +56,12 @@ html, body {
 }
 
 body {
-    margin: 80px 0
+    margin: 60px 0
 }
 
 .heading {
     h1.title{
-        font-size: 80px;
+        font-size: 60px;
         font-weight: bold;
         margin: 0;
         display: block;
@@ -75,7 +84,7 @@ body {
     width: $grid-container-width;
     height: $grid-container-width;
     margin-top: 40px;
-    padding: $grid-cell-dist;
+    padding: $grid-cell-padding;
     @include border-radius(6px);
     @include box-sizing(border-box);
 }
@@ -86,7 +95,7 @@ body {
 }
 
 .grid-row {
-    margin-bottom: $grid-cell-dist;
+    margin-bottom: $grid-cell-padding;
 }
 
 .grid-row:last-child {
@@ -98,7 +107,7 @@ body {
 }
 
 .grid-cell {
-    margin-right: $grid-cell-dist;
+    margin-right: $grid-cell-padding;
     width: $grid-cell-width;
     height: $grid-cell-width;
     float: left;
@@ -116,7 +125,7 @@ body {
 }
 
 .squard-row {
-    margin-bottom: $squard-cell-dist;
+    margin-bottom: $squard-cell-padding;
 }
 
 .squard-row:last-child {
@@ -128,7 +137,7 @@ body {
 }
 
 .squard-cell {
-    margin-right: $squard-cell-dist;
+    margin-right: $squard-cell-padding;
     width: $squard-cell-width;
     height: $squard-cell-width;
     float: left;
@@ -138,6 +147,39 @@ body {
 .squard-cell:last-child {
     margin-right: 0;
 }
+
+.number-container {
+    position: relative;
+    background: #E2E2E2;
+    width: $number-container-width;
+    height: $number-container-height;
+    margin-top: 20px;
+    padding: $button-padding;
+    @include border-radius(6px);
+    @include box-sizing(border-box);
+}
+
+.number-row {
+    margin-bottom: $button-padding;
+}
+
+.number-cell {
+    margin-right: $button-padding;
+    width: $button-width;
+    height: $button-width;
+    float: left;
+    background-color: #1fbad6;
+    @include border-radius(6px);
+}
+
+.number-cell:last-child {
+    margin-right: 0;
+}
+
+.number-row:after {
+    @include float-after();
+}
+
 
 
 @media screen and (max-width: 520px) {
@@ -164,26 +206,44 @@ body {
         width: $mobile-grid-container-width;
         height: $mobile-grid-container-width;
         margin-top: 17px;
-        padding: $mobile-grid-cell-dist;
+        padding: $mobile-grid-cell-padding;
     }
 
     .grid-row {
-        margin-bottom: $mobile-grid-cell-dist;
+        margin-bottom: $mobile-grid-cell-padding;
     }
 
     .grid-cell {
-        margin-right: $mobile-grid-cell-dist;
+        margin-right: $mobile-grid-cell-padding;
         width: $mobile-grid-cell-width;
         height: $mobile-grid-cell-width;
     }
 
     .squard-row {
-        margin-bottom: $mobile-squard-cell-dist;
+        margin-bottom: $mobile-squard-cell-padding;
     }
 
     .squard-cell {
-        margin-right: $mobile-squard-cell-dist;
+        margin-right: $mobile-squard-cell-padding;
         width: $mobile-squard-cell-width;
         height: $mobile-squard-cell-width;
+    }
+
+    .number-container {
+        width: $mobile-number-container-width;
+        height: $mobile-number-container-height;
+        margin-top: 10px;
+        padding: $mobile-button-padding;
+    }
+
+    .number-row {
+        margin-bottom: $mobile-button-padding;
+    }
+
+    .number-cell {
+        margin-right: $mobile-button-padding;
+        width: $mobile-button-width;
+        height: $mobile-button-width;
+
     }
 }
