@@ -30,7 +30,7 @@ module.exports = function(grunt) {
         yeoman: yeomanConfig,
         watch: {
             js: {
-                files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
+                files: ['<%= yeoman.app %>/scripts/{,*/}*.js', 'Gruntfile.js'],
                 tasks: ['jshint:all'],
                 options: {
                     livereload: LIVERELOAD_PORT
@@ -51,7 +51,6 @@ module.exports = function(grunt) {
                 files: [
                     '<%= yeoman.app %>/*.html',
                     '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css',
-                    '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
                     '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
                 ]
             }
