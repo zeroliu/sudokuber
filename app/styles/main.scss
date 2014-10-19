@@ -3,24 +3,29 @@
 // ************************************
 $grid-container-width: 500px;
 $grid-cell-padding: 10px;
-$grid-cell-width: ($grid-container-width - $grid-cell-padding) / 3 - $grid-cell-padding;
 $squard-cell-padding: 5px;
+$button-padding: 7px;
+$grid-cell-width: ($grid-container-width - $grid-cell-padding) / 3 - $grid-cell-padding;
 $squard-cell-width: ($grid-cell-width + $squard-cell-padding) / 3 - $squard-cell-padding;
 $number-container-width: $grid-container-width;
-$button-padding: 7px;
 $button-width: ($number-container-width - $button-padding) / 9 - $button-padding;
 $number-container-height: $button-width + $button-padding * 2;
+$extra-buttons-container-width: $grid-container-width;
+$extra-buttons-row-width: $button-width * 2 + $button-padding * 3;
+$extra-buttons-container-height: $button-width + $button-padding * 2;
 
 $mobile-grid-container-width: 280px;
 $mobile-grid-cell-padding: 5px;
-$mobile-grid-cell-width: ($mobile-grid-container-width - $mobile-grid-cell-padding) / 3 - $mobile-grid-cell-padding;
 $mobile-squard-cell-padding: 3px;
+$mobile-button-padding: 2px;
+$mobile-grid-cell-width: ($mobile-grid-container-width - $mobile-grid-cell-padding) / 3 - $mobile-grid-cell-padding;
 $mobile-squard-cell-width: ($mobile-grid-cell-width + $mobile-squard-cell-padding) / 3 - $mobile-squard-cell-padding;
-$mobile-game-button-padding: 3px;
 $mobile-number-container-width: $mobile-grid-container-width;
-$mobile-button-padding: 4px;
 $mobile-button-width: ($mobile-number-container-width - $mobile-button-padding) / 9 - $mobile-button-padding;
 $mobile-number-container-height: $mobile-button-width + $mobile-button-padding * 2;
+$mobile-extra-buttons-container-width: $mobile-grid-container-width;
+$mobile-extra-buttons-row-width: $mobile-button-width * 2 + $mobile-button-padding * 3;
+$mobile-extra-buttons-container-height: $mobile-button-width + $mobile-button-padding * 2;
 
 // ************************************
 // mixin
@@ -149,8 +154,6 @@ body {
 }
 
 .number-container {
-    position: relative;
-    background: #E2E2E2;
     width: $number-container-width;
     height: $number-container-height;
     margin-top: 20px;
@@ -177,6 +180,23 @@ body {
 }
 
 .number-row:after {
+    @include float-after();
+}
+
+.extra-buttons-container {
+    width: $extra-buttons-container-width;
+    height: $extra-buttons-container-height;
+    margin-top: 5px;
+    padding: $button-padding;
+    @include border-radius(6px);
+    @include box-sizing(border-box);
+}
+
+.extra-buttons-row {
+    float: right;
+}
+
+.extra-buttons-row:after {
     @include float-after();
 }
 
@@ -244,6 +264,12 @@ body {
         margin-right: $mobile-button-padding;
         width: $mobile-button-width;
         height: $mobile-button-width;
+    }
 
+    .extra-buttons-container {
+        width: $mobile-extra-buttons-container-width;
+        height: $mobile-extra-buttons-container-height;
+        margin-top: 3px;
+        padding: $mobile-button-padding;
     }
 }
