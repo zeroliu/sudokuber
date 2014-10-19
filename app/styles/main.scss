@@ -70,6 +70,7 @@ body {
     color: #fff;
     background-color: #1fbad6;
     @include border-radius(6px);
+    font-size: 20px;
 }
 
 .btn:active {
@@ -91,9 +92,9 @@ body {
     }
 
     .retry-button {
-        font-size: 16px;
         width: 60px;
         height: 60px;
+        font-size: 30px;
     }
 }
 
@@ -194,8 +195,6 @@ body {
     width: $button-width;
     height: $button-width;
     float: left;
-    background-color: #1fbad6;
-    @include border-radius(6px);
 }
 
 .number-cell:last-child {
@@ -237,6 +236,7 @@ body {
 
     .btn {
         @include border-radius(3px);
+        font-size: 15px;
     }
 
     .heading {
@@ -251,7 +251,7 @@ body {
         .retry-button {
             width: 27px;
             height: 27px;
-            font-size: 8px;
+            font-size: 15px;
         }
     }
 
