@@ -64,13 +64,36 @@ body {
     margin: 60px 0
 }
 
+.btn {
+    border: 0;
+    text-align: center;
+    color: #fff;
+    background-color: #1fbad6;
+    @include border-radius(6px);
+}
+
+.btn:active {
+    background-color: #1A879B;
+}
+
 .heading {
-    h1.title{
+    h1.title {
         font-size: 60px;
         font-weight: bold;
         margin: 0;
         display: block;
         float: left;
+    }
+
+    .control-row {
+        float: right;
+        padding-top: 10px;
+    }
+
+    .retry-button {
+        font-size: 16px;
+        width: 60px;
+        height: 60px;
     }
 }
 
@@ -212,9 +235,23 @@ body {
         padding: 20px;
     }
 
+    .btn {
+        @include border-radius(3px);
+    }
+
     .heading {
         h1.title{
             font-size: 27px;
+        }
+
+        .control-row {
+            padding-top: 5px;
+        }
+
+        .retry-button {
+            width: 27px;
+            height: 27px;
+            font-size: 8px;
         }
     }
 
