@@ -1,5 +1,189 @@
-body {
-    background: #fafafa;
+// ************************************
+// variables
+// ************************************
+$grid-container-width: 500px;
+$grid-cell-dist: 10px;
+$grid-cell-width: ($grid-container-width - $grid-cell-dist) / 3 - $grid-cell-dist;
+$squard-cell-dist: 5px;
+$squard-cell-width: ($grid-cell-width + $squard-cell-dist) / 3 - $squard-cell-dist;
+
+$mobile-grid-container-width: 280px;
+$mobile-grid-cell-dist: 5px;
+$mobile-grid-cell-width: ($mobile-grid-container-width - $mobile-grid-cell-dist) / 3 - $mobile-grid-cell-dist;
+$mobile-squard-cell-dist: 3px;
+$mobile-squard-cell-width: ($mobile-grid-cell-width + $mobile-squard-cell-dist) / 3 - $mobile-squard-cell-dist;
+
+// ************************************
+// mixin
+// ************************************
+@mixin border-radius($radius) {
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    border-radius: $radius;
+}
+
+@mixin box-sizing($type) {
+    -webkit-box-sizing: $type;
+    -moz-box-sizing: $type;
+    box-sizing: $type;
+}
+
+@mixin float-after() {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+// ************************************
+// main
+// ************************************
+html, body {
+    background: #fff url(https://d1a3f4spazzrp4.cloudfront.net/web-fresh/pattern-grid@1x.jpg) repeat left top;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    color: #333;
+    font-size: 18px;
+    color: #000;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 80px 0
+}
+
+.heading {
+    h1.title{
+        font-size: 80px;
+        font-weight: bold;
+        margin: 0;
+        display: block;
+        float: left;
+    }
+}
+
+.heading:after {
+    @include float-after();
+}
+
+.container {
+    width: $grid-container-width;
+    margin: 0 auto;
+}
+
+.game-container {
+    position: relative;
+    background: #070716;
+    width: $grid-container-width;
+    height: $grid-container-width;
+    margin-top: 40px;
+    padding: $grid-cell-dist;
+    @include border-radius(6px);
+    @include box-sizing(border-box);
+}
+
+.grid-container {
+    position: absolute;
+    z-index: 1;
+}
+
+.grid-row {
+    margin-bottom: $grid-cell-dist;
+}
+
+.grid-row:last-child {
+    margin-bottom: 0;   
+}
+
+.grid-row:after {
+    @include float-after();
+}
+
+.grid-cell {
+    margin-right: $grid-cell-dist;
+    width: $grid-cell-width;
+    height: $grid-cell-width;
+    float: left;
+    position: relative;
+}
+
+.grid-cell:last-child {
+    margin-right: 0;
+}
+
+.squard-container {
+    position: absolute;
+    z-index: 2;
+    padding: 0;
+}
+
+.squard-row {
+    margin-bottom: $squard-cell-dist;
+}
+
+.squard-row:last-child {
+    margin-bottom: 0;
+}
+
+.squard-row:after {
+    @include float-after();
+}
+
+.squard-cell {
+    margin-right: $squard-cell-dist;
+    width: $squard-cell-width;
+    height: $squard-cell-width;
+    float: left;
+    background-color: #F0F0F0;
+}
+
+.squard-cell:last-child {
+    margin-right: 0;
+}
+
+
+@media screen and (max-width: 520px) {
+    html, body {
+        font-size: 15px;
+    }
+
+    body {
+        margin-top: 0;
+        padding: 20px;
+    }
+
+    .heading {
+        h1.title{
+            font-size: 27px;
+        }
+    }
+
+    .container {
+        width: $mobile-grid-container-width;
+    }
+
+    .game-container {
+        width: $mobile-grid-container-width;
+        height: $mobile-grid-container-width;
+        margin-top: 17px;
+        padding: $mobile-grid-cell-dist;
+    }
+
+    .grid-row {
+        margin-bottom: $mobile-grid-cell-dist;
+    }
+
+    .grid-cell {
+        margin-right: $mobile-grid-cell-dist;
+        width: $mobile-grid-cell-width;
+        height: $mobile-grid-cell-width;
+    }
+
+    .squard-row {
+        margin-bottom: $mobile-squard-cell-dist;
+    }
+
+    .squard-cell {
+        margin-right: $mobile-squard-cell-dist;
+        width: $mobile-squard-cell-width;
+        height: $mobile-squard-cell-width;
+    }
 }
