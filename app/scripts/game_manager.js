@@ -5,7 +5,6 @@ define(['game_generator', 'grid', 'renderer'], function(GameGenerator, Grid, Ren
         this.renderer = new Renderer();
 
         this.setup();
-        this.renderer.draw(this.grid);
     }
 
     GameManager.prototype.setup = function() {
@@ -13,6 +12,20 @@ define(['game_generator', 'grid', 'renderer'], function(GameGenerator, Grid, Ren
 
         this.setupGrid(rawData.origin);
         this.solvedValues = rawData.solved;
+        this.metadata = {};
+        // this.metadata.selected = {
+        //     selected: {
+        //         squared: {
+        //             x: 1,
+        //             y: 2
+        //         },
+        //         tile: {
+        //             x: 2,
+        //             y: 1
+        //         }
+        //     }
+        // };
+        this.renderer.draw(this.grid, this.metadata);
     };
 
     GameManager.prototype.setupGrid = function(rawValues) {

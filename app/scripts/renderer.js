@@ -5,12 +5,13 @@ define(['jquery'], function($) {
         this.gridContainer = $('.grid-container');
     }
 
-    Renderer.prototype.draw = function(grid) {
+    Renderer.prototype.draw = function(grid, metadata) {
         var renderer = this;
         window.requestAnimationFrame(function() {
             grid.eachSquared(function(x, y, squared) {
                 renderer.addSquared(squared);
             });
+            renderer.updateSelectedTile(metadata.selected);
         });
     };
 
@@ -23,9 +24,6 @@ define(['jquery'], function($) {
             tileContainer.empty();
             tileContainer.removeClass('selected');
             if (tile !== null) {
-                if (tile.isSelected) {
-                    tileContainer.addClass('selected');
-                }
                 if (tile.value !== undefined) {
                     toAppendDiv = $('<div class="number-tile"></div>');
                     tileContainer.append(toAppendDiv);
@@ -53,6 +51,15 @@ define(['jquery'], function($) {
         return squaredContainer.find(
             '.squared-row:eq(' + y + ') ' +
             '.squared-cell:eq(' + x + ')');
+    };
+
+    Renderer.prototype.updateSelectedTile = function(selected) {
+        if (!selected) {
+            return;
+        }
+        var squaredContainer = this.findSquaredContainer(selected.squared.x, selected.squared.y);
+        var tileContainer = this.findTileContainer(selected.tile.x, selected.tile.y, squaredContainer);
+        tileContainer.addClass('selected');
     };
 
     return Renderer;
