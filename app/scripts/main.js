@@ -5,9 +5,7 @@ require.config({
     shim: {}
 });
 
-require(['GameManager'], function(GameManager) {
+require(['game_manager'], function(GameManager) {
     'use strict';
-    window.requestAnimationFrame(function() {
-        new GameManager();
-    });
+    new GameManager();
 });

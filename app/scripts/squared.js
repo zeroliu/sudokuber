@@ -1,4 +1,4 @@
-define('Squared', ['Tile'], function(Tile) {
+define(['tile'], function(Tile) {
     'use strict';
 
     // config: 
@@ -19,9 +19,9 @@ define('Squared', ['Tile'], function(Tile) {
     Squared.prototype.empty = function() {
         var tiles = [];
         var x, y, row;
-        for (x = 0; x < this.size; x++) {
+        for (y = 0; y < this.size; y++) {
             row = [];
-            for (y = 0; y < this.size; y++) {
+            for (x = 0; x < this.size; x++) {
                 row.push(null);
             }
             tiles.push(row);
@@ -33,10 +33,10 @@ define('Squared', ['Tile'], function(Tile) {
     Squared.prototype.fromState = function(state) {
         var tiles = [];
         var x, y, row, tileState;
-        for (x = 0; x < this.size; x++) {
+        for (y = 0; y < this.size; y++) {
             row = [];
-            for (y = 0; y < this.size; y++) {
-                tileState = state[x][y];
+            for (x = 0; x < this.size; x++) {
+                tileState = state[y][x];
                 row.push(tileState ? new Tile({
                     position: {
                         x: x,
@@ -52,5 +52,33 @@ define('Squared', ['Tile'], function(Tile) {
         return tiles;
     };
 
+    Squared.prototype.initWithOriginValues = function(originValues) {
+        var x, y, originValue;
+        for (y = 0; y < this.size; y++) {
+            for (x = 0; x < this.size; x++) {
+                this.tiles[y][x] = null;
+                originValue = originValues[y][x];
+                if (originValue !== null) {
+                    this.tiles[y][x] = new Tile({
+                        position: {
+                            x: x,
+                            y: y
+                        },
+                        value: originValue,
+                        isFixed: true
+                    });
+                }
+            }
+        }
+    };
+
+    Squared.prototype.eachTile = function(callback) {
+        var x, y;
+        for (y = 0; y < this.size; y++) {
+            for (x = 0; x < this.size; x++) {
+                callback(x, y, this.tiles[y][x]);
+            }
+        }
+    };
     return Squared;
 });

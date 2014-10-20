@@ -1,4 +1,4 @@
-define('Renderer', ['jquery'], function($) {
+define(['jquery'], function($) {
     'use strict';
 
     function Renderer() {

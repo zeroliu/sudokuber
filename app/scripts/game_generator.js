@@ -1,4 +1,4 @@
-define('GameGenerator', [], function() {
+define([], function() {
     'use strict';
 
     function GameGenerator() {}

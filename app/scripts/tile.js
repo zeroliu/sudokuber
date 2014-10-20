@@ -1,7 +1,7 @@
 /*
 Tile represents the number tiles in each squared
 */
-define('Tile', [], function() {
+define([], function() {
     'use strict';
 
     // config: 
