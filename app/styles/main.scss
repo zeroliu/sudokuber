@@ -99,11 +99,6 @@ body {
   @include box-sizing(border-box);
 }
 
-.tile-container {
-  position: absolute;
-  z-index: 2;
-}
-
 .grid-container {
   position: absolute;
   z-index: 1;
@@ -151,9 +146,38 @@ body {
   height: $squared-size;
   margin-right: $squared-spacing;
   width: $squared-size;
-
   &:last-child {
     margin-right: 0;
+  }
+}
+
+.guess-tile {
+  color: #1fbad6;
+  font-size: 15px;
+  height: 100%;
+  letter-spacing: 2px;
+  line-height: 15px;
+  text-align: center;
+  width: 100%;
+
+}
+
+.number-tile {
+  height: 100%;
+  position: relative;
+  text-align: center;
+  width: 100%;
+  color: #1fbad6;
+
+  .number {
+    font-size: 40px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%) translateX(-50%);
+
+    &.fixed {
+      color: #000;
+    }
   }
 }
 
@@ -266,6 +290,18 @@ body {
     margin-right: $squared-spacing;
     width: $squared-size;
   }
+
+  .guess-tile {
+    font-size: 9px;
+    letter-spacing: .5px;
+    line-height: 9px;
+  }
+
+  .number-tile {
+    .number {
+      font-size: 20px;
+    }
+}
 
   .number-container {
     height: $number-container-height;
