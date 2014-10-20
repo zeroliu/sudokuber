@@ -99,6 +99,11 @@ body {
   @include box-sizing(border-box);
 }
 
+.tile-container {
+  position: absolute;
+  z-index: 2;
+}
+
 .grid-container {
   position: absolute;
   z-index: 1;
