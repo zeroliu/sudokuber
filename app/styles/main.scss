@@ -6,6 +6,7 @@
 
 $field-width: 500px;
 $small-screen: $field-width + 20px;
+$uber-color: #1fbad6;
 
 // game field
 $game-container-margin-top: 40px;
@@ -46,7 +47,7 @@ body {
 }
 
 .btn {
-  background-color: #1fbad6;
+  background-color: $uber-color;
   border: 0;
   color: #fff;
   font-size: 20px;
@@ -146,28 +147,33 @@ body {
   height: $squared-size;
   margin-right: $squared-spacing;
   width: $squared-size;
+  
   &:last-child {
     margin-right: 0;
+  }
+
+  &.selected {
+    outline: 6px solid $uber-color;
+    @include box-shadow(0 0 5px 0px $uber-color inset);
   }
 }
 
 .guess-tile {
-  color: #1fbad6;
+  color: #9ca2a3;
   font-size: 15px;
   height: 100%;
   letter-spacing: 2px;
   line-height: 15px;
   text-align: center;
   width: 100%;
-
 }
 
 .number-tile {
+  color: #000;
   height: 100%;
   position: relative;
   text-align: center;
   width: 100%;
-  color: #1fbad6;
 
   .number {
     font-size: 40px;
@@ -176,7 +182,7 @@ body {
     transform: translateY(-50%) translateX(-50%);
 
     &.fixed {
-      color: #000;
+      color: $uber-color;
     }
   }
 }
@@ -289,6 +295,10 @@ body {
     height: $squared-size;
     margin-right: $squared-spacing;
     width: $squared-size;
+
+    &.selected {
+      outline: 3px solid $uber-color;
+    }
   }
 
   .guess-tile {
@@ -301,7 +311,7 @@ body {
     .number {
       font-size: 20px;
     }
-}
+  }
 
   .number-container {
     height: $number-container-height;
