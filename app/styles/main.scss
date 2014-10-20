@@ -218,7 +218,7 @@ body {
 @include smaller($small-screen) {
   // redefine size variable
   $game-container-margin-top: 17px;
-  $field-width: 280px;
+  $field-width: 300px;
   $grid-spacing: 5px;
   $grid-border-radius: 3px;
   $grid-size: ($field-width - $grid-spacing * ($grid-row-cells + 1)) / $grid-row-cells;
@@ -242,7 +242,8 @@ body {
 
   body {
     margin-top: 0;
-    padding: 20px;
+    padding-top: 20px;
+
   }
 
   .btn {
