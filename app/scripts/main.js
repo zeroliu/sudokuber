@@ -5,9 +5,9 @@ require.config({
     shim: {}
 });
 
-require(['app', 'jquery'], function(app, $) {
+require(['GameManager'], function(GameManager) {
     'use strict';
-    // use app here
-    console.log(app);
-    console.log('Running jQuery %s', $().jquery);
+    window.requestAnimationFrame(function() {
+        new GameManager();
+    });
 });
