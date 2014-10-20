@@ -30,6 +30,12 @@
   animation: $args;
 }
 
+@mixin transform($args) {
+  -webkit-transform: $args;
+  -moz-transform: $args;
+  transform: $args;
+}
+
 @mixin border-radius($radius) {
   -webkit-border-radius: $radius;
   -moz-border-radius: $radius;
