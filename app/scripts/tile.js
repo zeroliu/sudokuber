@@ -17,6 +17,7 @@ define([], function() {
         this.value = config.value;
         this.draft = config.draft;
         this.isFixed = (config.isFixed === undefined) ? false : config.isFixed;
+        this.isSelected = (config.isSelected === undefined) ? false : config.isSelected;
     }
 
     Tile.prototype.updateValue = function(value) {

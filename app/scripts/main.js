@@ -7,5 +7,8 @@ require.config({
 
 require(['game_manager'], function(GameManager) {
     'use strict';
-    new GameManager();
+    // Wait till the browser is ready to render the game (avoids glitches)
+    window.requestAnimationFrame(function() {
+        new GameManager();
+    });
 });
