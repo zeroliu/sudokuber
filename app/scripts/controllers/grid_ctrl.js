@@ -1,16 +1,32 @@
 //Grid controller controls the grids on the board
-define(['controllers/ctrl_base', 'views/tile_view', 'views/board_view', 'views/button_view', 'models/grid', 'game_generator', 'jquery'],
-    function(CtrlBase, TileView, BoardView, ButtonView, Grid, GameGenerator, $) {
+define(['controllers/ctrl_base', 'views/tile_view', 'views/board_view', 'views/button_view', 'models/grid', 'game_generator', 'keyboard_input', 'jquery'],
+    function(CtrlBase, TileView, BoardView, ButtonView, Grid, GameGenerator, KeyboardInput, $) {
         'use strict';
 
         function GridCtrl() {
             CtrlBase.call(this);
-            this.gridContainer = $('.grid-container');
-            this.numberContainer = $('.number-container');
-            this.setup();
+            var ctrl = this;
+            ctrl.keyboardInput = new KeyboardInput();
+            ctrl.keyboardInput.registerEvent(ctrl, ctrl.onKeyDown, 'keyDown');
+            ctrl.gridContainer = $('.grid-container');
+            ctrl.numberContainer = $('.number-container');
+            ctrl.setup();
         }
 
         GridCtrl.prototype = Object.create(CtrlBase.prototype);
+
+        GridCtrl.prototype.checkWin = function() {
+            var isWin = true;
+            var ctrl = this;
+            ctrl.model.grid.eachSquared(function(xs, ys, squared) {
+                squared.eachTile(function(xt, yt, tile) {
+                    if (tile.value !== ctrl.model.solvedGrid[ys][xs][yt][xt]) {
+                        isWin = false;
+                    }
+                });
+            });
+            console.log(isWin);
+        };
 
         GridCtrl.prototype.setup = function() {
             this.setupModel();
@@ -103,6 +119,12 @@ define(['controllers/ctrl_base', 'views/tile_view', 'views/board_view', 'views/b
             this.updateSelectedTileValue(null);
         };
 
+        GridCtrl.prototype.onKeyDown = function(data) {
+            if (data >= 1 && data <= 9) {
+                this.updateSelectedTileValue(data);
+            }
+        };
+
         // Helper methods
         GridCtrl.prototype.findSquaredContainer = function(x, y) {
             return this.gridContainer.find(
@@ -130,6 +152,7 @@ define(['controllers/ctrl_base', 'views/tile_view', 'views/board_view', 'views/b
             }
             this.model.selectedTile.value = value;
             this.views.tileViews[this.generateTileViewKey(this.model.selectedTile)].redraw();
+            this.checkWin();
         };
 
         return GridCtrl;
