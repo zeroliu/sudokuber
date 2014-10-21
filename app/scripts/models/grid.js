@@ -49,7 +49,7 @@ define(['models/squared'], function(Squared) {
 
     Grid.prototype.initWithOriginValues = function(originValues) {
         this.eachSquared(function(x, y, squard) {
-            squard.initWithOriginValues(originValues[x][y]);
+            squard.initWithOriginValues(originValues[y][x]);
         });
     };
 
