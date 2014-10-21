@@ -11,14 +11,15 @@
 [class^="flaticon-"]:before, [class*=" flaticon-"]:before,
 [class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
 	font-family: Flaticon;
-	font-style: normal;
-}.flaticon-edit41:before {
+        font-size: 25px;
+font-style: normal;
+}.flaticon-draft1:before {
 	content: "\e000";
 }
-.flaticon-eraser8:before {
+.flaticon-edit41:before {
 	content: "\e001";
 }
-.flaticon-pencil54:before {
+.flaticon-eraser8:before {
 	content: "\e002";
 }
 .flaticon-rotate:before {

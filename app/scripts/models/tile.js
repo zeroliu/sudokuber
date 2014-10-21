@@ -24,6 +24,36 @@ define([], function() {
 
     Tile.prototype.updateValue = function(value) {
         this.value = value;
+        this.draft = undefined;
+    };
+
+    Tile.prototype.updateDraft = function(value) {
+        // Do not update draft if a value has been filled into the tile
+        if (this.hasValue()) {
+            return;
+        }
+        if (!this.draft) {
+            this.draft = [];
+        }
+        var index = this.draft.indexOf(value);
+        if (index === -1) {
+            this.draft.push(value);
+            this.draft.sort();
+        } else {
+            this.draft.splice(index, 1);
+        }
+    };
+
+    Tile.prototype.clearDraft = function() {
+        this.draft = undefined;
+    };
+
+    Tile.prototype.hasValue = function() {
+        return this.value !== null;
+    };
+
+    Tile.prototype.hasDraft = function() {
+        return this.draft && this.draft.length > 0;
     };
 
     return Tile;

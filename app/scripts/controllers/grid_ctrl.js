@@ -1,6 +1,6 @@
 //Grid controller controls the grids on the board
-define(['controllers/ctrl_base', 'views/tile_view', 'views/board_view', 'views/button_view', 'models/grid', 'game_generator', 'keyboard_input', 'jquery'],
-    function(CtrlBase, TileView, BoardView, ButtonView, Grid, GameGenerator, KeyboardInput, $) {
+define(['controllers/ctrl_base', 'views/tile_view', 'views/board_view', 'views/button_view', 'views/state_button_view', 'models/grid', 'game_generator', 'keyboard_input', 'jquery'],
+    function(CtrlBase, TileView, BoardView, ButtonView, StateButtonView, Grid, GameGenerator, KeyboardInput, $) {
         'use strict';
 
         function GridCtrl() {
@@ -26,7 +26,7 @@ define(['controllers/ctrl_base', 'views/tile_view', 'views/board_view', 'views/b
                 });
             });
             if (isWin) {
-                alert('You win!');
+                // alert('You win!');
             }
         };
 
@@ -100,6 +100,15 @@ define(['controllers/ctrl_base', 'views/tile_view', 'views/board_view', 'views/b
             });
             ctrl.views.retryButtonView.registerEvent(ctrl, ctrl.onRetryButtonClicked, 'click');
             ctrl.addView(ctrl.views.retryButtonView);
+            ctrl.views.draftButtonView = new StateButtonView({
+                element: $('.btn-draft'),
+                properties: {
+                    iconOn: 'flaticon-draft1',
+                    iconOff: 'flaticon-edit41'
+                }
+            });
+            ctrl.views.draftButtonView.registerEvent(ctrl, ctrl.onDraftButtonClicked, 'click');
+            ctrl.addView(ctrl.views.draftButtonView);
         };
 
         // Event handlers
@@ -114,11 +123,24 @@ define(['controllers/ctrl_base', 'views/tile_view', 'views/board_view', 'views/b
         };
 
         GridCtrl.prototype.onNumberButtonClicked = function(properties) {
-            this.updateSelectedTileValue(properties.index + 1);
+            if (this.model.inDraftMode) {
+                this.updateSelectedTileDraft(properties.index + 1);
+            } else {
+                this.updateSelectedTileValue(properties.index + 1);
+            }
         };
 
         GridCtrl.prototype.onEraseButtonClicked = function() {
-            this.updateSelectedTileValue(null);
+            if (this.model.inDraftMode) {
+                this.clearSelectedTileDraft();
+            } else {
+                this.updateSelectedTileValue(null);
+            }
+
+        };
+
+        GridCtrl.prototype.onDraftButtonClicked = function(properties) {
+            this.model.inDraftMode = properties.state;
         };
 
         GridCtrl.prototype.onKeyDown = function(data) {
@@ -154,9 +176,35 @@ define(['controllers/ctrl_base', 'views/tile_view', 'views/board_view', 'views/b
             if (this.model.selectedTile.isFixed) {
                 return;
             }
-            this.model.selectedTile.value = value;
-            this.views.tileViews[this.generateTileViewKey(this.model.selectedTile)].redraw();
+            this.model.selectedTile.updateValue(value);
+            this.findTileViewByTile(this.model.selectedTile).redraw();
             this.checkWin();
+        };
+
+        GridCtrl.prototype.updateSelectedTileDraft = function(value) {
+            if (!this.model.selectedTile) {
+                return;
+            }
+            if (this.model.selectedTile.isFixed) {
+                return;
+            }
+            this.model.selectedTile.updateDraft(value);
+            this.findTileViewByTile(this.model.selectedTile).redraw();
+        };
+
+        GridCtrl.prototype.clearSelectedTileDraft = function() {
+            if (!this.model.selectedTile) {
+                return;
+            }
+            if (this.model.selectedTile.isFixed) {
+                return;
+            }
+            this.model.selectedTile.clearDraft();
+            this.findTileViewByTile(this.model.selectedTile).redraw();
+        };
+
+        GridCtrl.prototype.findTileViewByTile = function(tile) {
+            return this.views.tileViews[this.generateTileViewKey(tile)];
         };
 
         // debug
@@ -164,7 +212,7 @@ define(['controllers/ctrl_base', 'views/tile_view', 'views/board_view', 'views/b
             var ctrl = this;
             ctrl.model.grid.eachSquared(function(xs, ys, squared) {
                 squared.eachTile(function(xt, yt, tile) {
-                    tile.value = ctrl.model.solvedGrid[ys][xs][yt][xt];
+                    tile.updateValue(ctrl.model.solvedGrid[ys][xs][yt][xt]);
                     ctrl.views.tileViews[ctrl.generateTileViewKey(tile)].redraw();
                 });
             });

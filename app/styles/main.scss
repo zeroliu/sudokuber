@@ -16,7 +16,7 @@ $grid-size: ($field-width - $grid-spacing * ($grid-row-cells + 1) - 1) / $grid-r
 $grid-border-radius: 6px;
 $squared-spacing: 5px;
 $squared-row-cells: 3;
-$squared-size: ($grid-size - $squared-spacing * ($squared-row-cells - 1)) / $squared-row-cells;
+$tile-size: ($grid-size - $squared-spacing * ($squared-row-cells - 1)) / $squared-row-cells;
 
 $game-button-spacing: 7px;
 $game-button-radius: 6px;
@@ -50,9 +50,8 @@ body {
   background-color: $uber-color;
   border: 0;
   color: #fff;
-  font-size: 20px;
+  font-size: 25px;
   outline: none;
-  text-align: center;
   @include border-radius($game-button-radius);
 
   &:active {
@@ -144,9 +143,9 @@ body {
 .squared-cell {
   background-color: #f0f0f0;
   float: left;
-  height: $squared-size;
+  height: $tile-size;
   margin-right: $squared-spacing;
-  width: $squared-size;
+  width: $tile-size;
   
   &:last-child {
     margin-right: 0;
@@ -163,15 +162,28 @@ body {
   width: 100%;
 }
 
-.guess-tile {
+.draft-tile {
   color: #9ca2a3;
   font-size: 14px;
   height: 100%;
-  letter-spacing: 2px;
-  line-height: 15px;
   padding: 1px;
-  text-align: center;
+  position: relative;
   width: 100%;
+  @include box-sizing(border-box);
+
+  @for $x from 0 through $grid-row-cells - 1 {
+    @for $y from 0 through $grid-row-cells - 1 {
+      .number-position-#{$y}-#{$x} {
+        $xpos: $tile-size / 3 * $x + $tile-size / 12;
+        $ypos: $tile-size / 3 * $y;
+        @include transform(translate($xpos, $ypos));
+      }
+    }
+  }
+
+  .number {
+    position: absolute;
+  }
 }
 
 .number-tile {
@@ -180,12 +192,13 @@ body {
   position: relative;
   text-align: center;
   width: 100%;
+  @include box-sizing(border-box);
 
   .number {
     font-size: 40px;
     position: absolute;
     top: 50%;
-    @include transform(translateY(-50%) translateX(-50%));
+    @include transform(translate(-50%, -50%));
 
     &.fixed {
       color: $uber-color;
@@ -228,7 +241,7 @@ body {
   $grid-border-radius: 3px;
   $grid-size: ($field-width - $grid-spacing * ($grid-row-cells + 1)) / $grid-row-cells;
   $squared-spacing: 2px;
-  $squared-size: ($grid-size - $squared-spacing * ($squared-row-cells - 1)) / $squared-row-cells;
+  $tile-size: ($grid-size - $squared-spacing * ($squared-row-cells - 1)) / $squared-row-cells;
 
   $game-button-spacing: 4px;
   $game-button-radius: 3px;
@@ -272,6 +285,11 @@ body {
     }
   }
 
+  [class^="flaticon-"]:before, [class*=" flaticon-"]:before,
+  [class^="flaticon-"]:after, [class*=" flaticon-"]:after {
+    font-size: 15px;
+  }
+
   .container {
     width: $field-width;
   }
@@ -299,19 +317,28 @@ body {
   }
 
   .squared-cell {
-    height: $squared-size;
+    height: $tile-size;
     margin-right: $squared-spacing;
-    width: $squared-size;
+    width: $tile-size;
 
     &.selected {
       outline: 2px solid $uber-color;
     }
   }
 
-  .guess-tile {
-    font-size: 9px;
-    letter-spacing: .5px;
-    line-height: 9px;
+  .draft-tile {
+    font-size: 8px;
+
+
+    @for $x from 0 through $grid-row-cells - 1 {
+      @for $y from 0 through $grid-row-cells - 1 {
+        .number-position-#{$y}-#{$x} {
+          $xpos: $tile-size / 3 * $x + $tile-size / 12;
+          $ypos: $tile-size / 3 * $y;
+          @include transform(translate($xpos, $ypos));
+        }
+      }
+    }
   }
 
   .number-tile {

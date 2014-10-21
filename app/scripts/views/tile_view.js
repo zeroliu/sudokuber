@@ -18,13 +18,24 @@ define(['views/view_base', 'jquery'], function(ViewBase, $) {
         if (this.element) {
             this.element.remove();
         }
-        if (this.properties.tile.value !== null) {
+        if (this.properties.tile.hasValue()) {
             this.element = $('<div class="number-tile"></div>');
             var toAppendSpan = $('<span class="number"></span>');
             this.element.append(toAppendSpan);
             toAppendSpan.text(this.properties.tile.value);
             if (this.properties.tile.isFixed) {
                 toAppendSpan.addClass('fixed');
+            }
+        } else if (this.properties.tile.hasDraft()) {
+            this.element = $('<div class="draft-tile"></div>');
+            var index, numberSpan, x, y;
+            for (index = 0; index < this.properties.tile.draft.length; index++) {
+                numberSpan = $('<span class="number"></span>');
+                this.element.append(numberSpan);
+                numberSpan.text(this.properties.tile.draft[index]);
+                y = parseInt(index / 3);
+                x = index % 3;
+                numberSpan.addClass('number-position-' + y + '-' + x);
             }
         } else {
             this.element = $('<div class="empty-tile"></div>');
