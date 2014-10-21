@@ -1,4 +1,5 @@
 @import 'helpers';
+@import 'animations';
 
 // ************************************
 // variables
@@ -55,7 +56,8 @@ body {
   @include border-radius($game-button-radius);
 
   &:active {
-    background-color: #1a879b;
+    // background-color: #1a879b;
+    @include animation(pop 200ms);
   }
 }
 
@@ -200,6 +202,7 @@ body {
   text-align: center;
   width: 100%;
   @include box-sizing(border-box);
+  @include animation(appear 200ms);
 
   .number {
     font-size: 40px;
@@ -343,7 +346,6 @@ body {
 
   .draft-tile {
     font-size: 8px;
-
 
     @for $x from 0 through $grid-row-cells - 1 {
       @for $y from 0 through $grid-row-cells - 1 {

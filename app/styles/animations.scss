@@ -1,0 +1,48 @@
+@import 'helpers';
+
+@include keyframes(pop) {
+  0% {
+    @include transform(scale(1));
+  }
+
+  50% {
+    @include transform(scale(1.2));
+  }
+
+  100% {
+    @include transform(scale(1));
+  }
+}
+
+@include keyframes(appear) {
+  0% {
+    opacity: 0;
+    @include transform(scale(1.5));
+  }
+
+  100% {
+    opacity: 1;
+    @include transform(scale(1));
+  }
+}
+
+@include keyframes(shadowin-black) {
+  0% {
+    @include box-shadow(0 0 0 0 #000 inset);
+  }
+
+  100% {
+    @include box-shadow(0 0 20px 0 #000 inset);
+  }
+}
+
+@include keyframes(shadowin-uber) {
+  0% {
+    @include box-shadow(0 0 0 0 #1fbad6 inset);
+  }
+
+  100% {
+    @include box-shadow(0 0 20px 0 #1fbad6 inset);
+  }
+}
+
