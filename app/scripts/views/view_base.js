@@ -33,9 +33,12 @@ define([], function() {
         var eventTriggers = this.events[event];
         if (eventTriggers) {
             eventTriggers.forEach(function(eventTrigger) {
-                eventTrigger.callback.call(eventTrigger.target, view.tile);
+                eventTrigger.callback.call(eventTrigger.target, view.properties);
             });
         }
+    };
+    ViewBase.prototype.redraw = function() {
+        this.isDirty = true;
     };
     return ViewBase;
 });

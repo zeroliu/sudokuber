@@ -1,8 +1,10 @@
 define(['views/view_base', 'jquery'], function(ViewBase, $) {
     'use strict';
 
-    function BoardView() {
+    function BoardView(config) {
         ViewBase.call(this);
+        this.element = config.element || $('.grid-container');
+
         this.oldSelectedTilePosition = undefined;
         this.selectedTilePosition = undefined;
     }
@@ -26,7 +28,7 @@ define(['views/view_base', 'jquery'], function(ViewBase, $) {
 
     //TODO: not duplicate with GridCtrl
     BoardView.prototype.findTileContainer = function(tilePosition) {
-        var squaredContainer = $('.grid-container').find(
+        var squaredContainer = this.element.find(
             '.grid-row:eq(' + tilePosition.squared.y + ') ' +
             '.grid-cell:eq(' + tilePosition.squared.x + ') ' +
             '.squared-container');

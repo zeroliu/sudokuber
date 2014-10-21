@@ -1,12 +1,12 @@
 define(['views/view_base', 'jquery'], function(ViewBase, $) {
     'use strict';
 
-    function TileView(parent) {
+    function TileView(config) {
         ViewBase.call(this);
-        this.parent = parent;
-        this.value = undefined;
-        this.isFixed = undefined;
-        this.element = undefined;
+        this.parent = config.parent;
+        this.element = config.element;
+
+        $.extend(this.properties, config.properties);
     }
 
     TileView.prototype = Object.create(ViewBase.prototype);
@@ -18,12 +18,12 @@ define(['views/view_base', 'jquery'], function(ViewBase, $) {
         if (this.element) {
             this.element.remove();
         }
-        if (this.value !== null) {
+        if (this.properties.tile.value !== null) {
             this.element = $('<div class="number-tile"></div>');
             var toAppendSpan = $('<span class="number"></span>');
             this.element.append(toAppendSpan);
-            toAppendSpan.text(this.value);
-            if (this.isFixed) {
+            toAppendSpan.text(this.properties.tile.value);
+            if (this.properties.tile.isFixed) {
                 toAppendSpan.addClass('fixed');
             }
         } else {
@@ -36,9 +36,7 @@ define(['views/view_base', 'jquery'], function(ViewBase, $) {
 
     };
     TileView.prototype.configWithTile = function(tile) {
-        this.tile = tile;
-        this.value = tile.value;
-        this.isFixed = tile.isFixed;
+        this.properties.tile = tile;
         this.isDirty = true;
     };
     return TileView;
