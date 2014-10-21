@@ -1,4 +1,4 @@
-define(['tile'], function(Tile) {
+define(['models/tile'], function(Tile) {
     'use strict';
 
     // config: 
@@ -22,7 +22,15 @@ define(['tile'], function(Tile) {
         for (y = 0; y < this.size; y++) {
             row = [];
             for (x = 0; x < this.size; x++) {
-                row.push(null);
+                row.push(new Tile({
+                    position: {
+                        x: x,
+                        y: y
+                    },
+                    isFixed: undefined,
+                    value: undefined,
+                    draft: []
+                }));
             }
             tiles.push(row);
         }
@@ -58,16 +66,15 @@ define(['tile'], function(Tile) {
             for (x = 0; x < this.size; x++) {
                 this.tiles[y][x] = null;
                 originValue = originValues[y][x];
-                if (originValue !== null) {
-                    this.tiles[y][x] = new Tile({
-                        position: {
-                            x: x,
-                            y: y
-                        },
-                        value: originValue,
-                        isFixed: true
-                    });
-                }
+                this.tiles[y][x] = new Tile({
+                    position: {
+                        x: x,
+                        y: y
+                    },
+                    value: originValue,
+                    isFixed: originValue !== null
+                });
+
             }
         }
     };

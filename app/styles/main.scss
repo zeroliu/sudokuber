@@ -158,13 +158,18 @@ body {
   }
 }
 
+.empty-tile {
+  height: 100%;
+  width: 100%;
+}
+
 .guess-tile {
-  padding: 1px;
   color: #9ca2a3;
   font-size: 14px;
   height: 100%;
   letter-spacing: 2px;
   line-height: 15px;
+  padding: 1px;
   text-align: center;
   width: 100%;
 }

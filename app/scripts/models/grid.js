@@ -1,4 +1,4 @@
-define(['squared'], function(Squared) {
+define(['models/squared'], function(Squared) {
     'use strict';
     // config:
     // - state: a two-dim list of Squared represents the state of the squared
