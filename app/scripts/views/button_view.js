@@ -14,5 +14,8 @@ define(['views/view_base', 'jquery'], function(ViewBase, $) {
     }
 
     ButtonView.prototype = Object.create(ViewBase.prototype);
+    ButtonView.prototype.destroy = function() {
+        this.element.off('click');
+    };
     return ButtonView;
 });

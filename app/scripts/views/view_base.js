@@ -40,5 +40,7 @@ define([], function() {
     ViewBase.prototype.redraw = function() {
         this.isDirty = true;
     };
+    ViewBase.prototype.destroy = function() {};
+
     return ViewBase;
 });

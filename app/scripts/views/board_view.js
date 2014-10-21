@@ -38,16 +38,24 @@ define(['views/view_base', 'jquery'], function(ViewBase, $) {
     };
 
     BoardView.prototype.draw = function() {
-        var view = this;
         ViewBase.prototype.draw.call(this);
         console.log('draw board');
         if (this.oldSelectedTilePosition) {
-            view.findTileContainer(this.oldSelectedTilePosition).removeClass('selected');
+            this.findTileContainer(this.oldSelectedTilePosition).removeClass('selected');
         }
         if (this.selectedTilePosition) {
-            view.findTileContainer(this.selectedTilePosition).addClass('selected');
+            this.findTileContainer(this.selectedTilePosition).addClass('selected');
         }
     };
-    return BoardView;
 
+    BoardView.prototype.destroy = function() {
+        if (this.oldSelectedTilePosition) {
+            this.findTileContainer(this.oldSelectedTilePosition).removeClass('selected');
+        }
+        if (this.selectedTilePosition) {
+            this.findTileContainer(this.selectedTilePosition).removeClass('selected');
+        }
+    };
+
+    return BoardView;
 });

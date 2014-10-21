@@ -39,6 +39,9 @@ define(['views/view_base', 'jquery'], function(ViewBase, $) {
         this.properties.tile = tile;
         this.isDirty = true;
     };
+    TileView.prototype.destroy = function() {
+        this.element.remove();
+    };
     return TileView;
 
 });
