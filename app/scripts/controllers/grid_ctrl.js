@@ -1,5 +1,5 @@
 //Grid controller controls the grids on the board
-define(['controllers/ctrl_base', 'views/tile_view', 'models/grid', 'jquery'], function(CtrlBase, TileView, Grid, $) {
+define(['controllers/ctrl_base', 'views/tile_view', 'views/board_view', 'models/grid', 'jquery'], function(CtrlBase, TileView, BoardView, Grid, $) {
     'use strict';
 
     function GridCtrl(rawData) {
@@ -25,6 +25,8 @@ define(['controllers/ctrl_base', 'views/tile_view', 'models/grid', 'jquery'], fu
                 tileView.registerEvent(ctrl, ctrl.selectTile, 'click');
             });
         });
+        this.boardView = new BoardView();
+        ctrl.addView(this.boardView);
     };
 
     GridCtrl.prototype.findSquaredContainer = function(x, y) {
@@ -49,7 +51,8 @@ define(['controllers/ctrl_base', 'views/tile_view', 'models/grid', 'jquery'], fu
     };
 
     GridCtrl.prototype.selectTile = function(tile) {
-        console.log(tile);
+        this.model.selectedTile = tile;
+        this.boardView.updateSelectedTile(tile);
     };
 
     return GridCtrl;

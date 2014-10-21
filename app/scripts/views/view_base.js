@@ -28,5 +28,14 @@ define([], function() {
         }
         this.isDirty = true;
     };
+    ViewBase.prototype.triggerEvent = function(event) {
+        var view = this;
+        var eventTriggers = this.events[event];
+        if (eventTriggers) {
+            eventTriggers.forEach(function(eventTrigger) {
+                eventTrigger.callback.call(eventTrigger.target, view.tile);
+            });
+        }
+    };
     return ViewBase;
 });

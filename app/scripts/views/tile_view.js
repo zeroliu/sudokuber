@@ -36,18 +36,10 @@ define(['views/view_base', 'jquery'], function(ViewBase, $) {
 
     };
     TileView.prototype.configWithTile = function(tile) {
+        this.tile = tile;
         this.value = tile.value;
         this.isFixed = tile.isFixed;
         this.isDirty = true;
-    };
-    TileView.prototype.triggerEvent = function(event) {
-        var eventTriggers = this.events[event];
-        if (eventTriggers) {
-            console.log(eventTriggers);
-            // eventTriggers.forEach(function(eventTrigger) {
-            //     console.log(eventTrigger);
-            // });
-        }
     };
     return TileView;
 

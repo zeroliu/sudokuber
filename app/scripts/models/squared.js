@@ -27,6 +27,7 @@ define(['models/tile'], function(Tile) {
                         x: x,
                         y: y
                     },
+                    parent: this,
                     isFixed: undefined,
                     value: undefined,
                     draft: []
@@ -50,6 +51,7 @@ define(['models/tile'], function(Tile) {
                         x: x,
                         y: y
                     },
+                    parent: this,
                     value: tileState.value,
                     draft: tileState.draft,
                     isFixed: tileState.isFixed
@@ -71,6 +73,7 @@ define(['models/tile'], function(Tile) {
                         x: x,
                         y: y
                     },
+                    parent: this,
                     value: originValue,
                     isFixed: originValue !== null
                 });
