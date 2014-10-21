@@ -8,6 +8,7 @@ define(['controllers/ctrl_base', 'views/tile_view', 'views/board_view', 'views/b
 
             this.gridContainer = $('.grid-container');
             this.numberContainer = $('.number-container');
+            this.extraButtonContainer = $('.extra-button-container');
             this.model = {};
             this.setupGrid(rawData.origin);
             this.model.solvedGrid = rawData.solved;
@@ -40,7 +41,8 @@ define(['controllers/ctrl_base', 'views/tile_view', 'views/board_view', 'views/b
             ctrl.addView(ctrl.boardView);
 
             var buttons = ctrl.numberContainer.find('button');
-            for (var index = 0; index < buttons.length; index++) {
+            var index;
+            for (index = 0; index < buttons.length; index++) {
                 var buttonView = new ButtonView({
                     element: $(buttons[index]),
                     properties: {
@@ -48,8 +50,13 @@ define(['controllers/ctrl_base', 'views/tile_view', 'views/board_view', 'views/b
                     }
                 });
                 buttonView.registerEvent(ctrl, ctrl.onNumberButtonClicked, 'click');
-                ctrl.addView(buttonView);
             }
+            var extraButtons = ctrl.extraButtonContainer.find('button');
+            ctrl.eraseButtonView = new ButtonView({
+                element: $(extraButtons[0])
+            });
+            ctrl.eraseButtonView.registerEvent(ctrl, ctrl.onEraseButtonClicked, 'click');
+
         };
 
         GridCtrl.prototype.findSquaredContainer = function(x, y) {
@@ -83,10 +90,21 @@ define(['controllers/ctrl_base', 'views/tile_view', 'views/board_view', 'views/b
         };
 
         GridCtrl.prototype.onNumberButtonClicked = function(properties) {
+            this.updateSelectedTileValue(properties.index + 1);
+        };
+
+        GridCtrl.prototype.onEraseButtonClicked = function() {
+            this.updateSelectedTileValue(null);
+        };
+
+        GridCtrl.prototype.updateSelectedTileValue = function(value) {
+            if (!this.model.selectedTile) {
+                return;
+            }
             if (this.model.selectedTile.isFixed) {
                 return;
             }
-            this.model.selectedTile.value = properties.index;
+            this.model.selectedTile.value = value;
             this.tileViews[this.generateTileViewKey(this.model.selectedTile)].redraw();
         };
 
