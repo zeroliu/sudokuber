@@ -33,6 +33,8 @@ define(['jquery'], function($) {
             var keyCodeDiff = event.keyCode - ZERO_KEYCODE;
             if (keyCodeDiff >= 1 && keyCodeDiff <= 9) {
                 manager.triggerEvent('keyDown', keyCodeDiff);
+            } else {
+                manager.triggerEvent('keyDown', 0);
             }
         });
     };

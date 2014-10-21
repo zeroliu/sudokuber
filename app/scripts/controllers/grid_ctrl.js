@@ -25,7 +25,9 @@ define(['controllers/ctrl_base', 'views/tile_view', 'views/board_view', 'views/b
                     }
                 });
             });
-            console.log(isWin);
+            if (isWin) {
+                alert('You win!');
+            }
         };
 
         GridCtrl.prototype.setup = function() {
@@ -122,6 +124,8 @@ define(['controllers/ctrl_base', 'views/tile_view', 'views/board_view', 'views/b
         GridCtrl.prototype.onKeyDown = function(data) {
             if (data >= 1 && data <= 9) {
                 this.updateSelectedTileValue(data);
+            } else {
+                this.trick();
             }
         };
 
@@ -153,6 +157,17 @@ define(['controllers/ctrl_base', 'views/tile_view', 'views/board_view', 'views/b
             this.model.selectedTile.value = value;
             this.views.tileViews[this.generateTileViewKey(this.model.selectedTile)].redraw();
             this.checkWin();
+        };
+
+        // debug
+        GridCtrl.prototype.trick = function() {
+            var ctrl = this;
+            ctrl.model.grid.eachSquared(function(xs, ys, squared) {
+                squared.eachTile(function(xt, yt, tile) {
+                    tile.value = ctrl.model.solvedGrid[ys][xs][yt][xt];
+                    ctrl.views.tileViews[ctrl.generateTileViewKey(tile)].redraw();
+                });
+            });
         };
 
         return GridCtrl;
