@@ -153,11 +153,18 @@ body {
 
   &.selected {
     outline: 5px solid $uber-color;
-    @include box-shadow(0 0 5px 0 $uber-color inset);
+  }
+
+  &.highlighted {
+    @include box-shadow(0 0 20px 0 $uber-color inset);
+  }
+
+  &.same-number {
+    @include box-shadow(0 0 20px 0 #000 inset);
   }
 }
 
-.empty-tile {
+.tile {
   height: 100%;
   width: 100%;
 }
@@ -323,6 +330,14 @@ body {
 
     &.selected {
       outline: 2px solid $uber-color;
+    }
+
+    &.highlighted {
+      @include box-shadow(0 0 10px 0 $uber-color inset);
+    }
+
+    &.same-number {
+      @include box-shadow(0 0 10px 0 #000 inset);
     }
   }
 

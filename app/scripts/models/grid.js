@@ -53,6 +53,10 @@ define(['models/squared'], function(Squared) {
         });
     };
 
+    Grid.prototype.findSquared = function(x, y) {
+        return this.squareds[y][x];
+    };
+
     Grid.prototype.eachSquared = function(callback) {
         var x, y;
         for (y = 0; y < this.size; y++) {

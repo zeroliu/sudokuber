@@ -74,7 +74,10 @@ define(['controllers/ctrl_base', 'views/tile_view', 'views/board_view', 'views/b
             });
 
             ctrl.views.boardView = new BoardView({
-                element: ctrl.gridContainer
+                element: ctrl.gridContainer,
+                properties: {
+                    grid: ctrl.model.grid
+                }
             });
             ctrl.addView(ctrl.views.boardView);
 
@@ -178,6 +181,7 @@ define(['controllers/ctrl_base', 'views/tile_view', 'views/board_view', 'views/b
             }
             this.model.selectedTile.updateValue(value);
             this.findTileViewByTile(this.model.selectedTile).redraw();
+            this.views.boardView.redraw();
             this.checkWin();
         };
 

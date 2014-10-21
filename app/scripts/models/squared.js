@@ -82,6 +82,10 @@ define(['models/tile'], function(Tile) {
         }
     };
 
+    Squared.prototype.findTile = function(x, y) {
+        return this.tiles[y][x];
+    };
+
     Squared.prototype.eachTile = function(callback) {
         var x, y;
         for (y = 0; y < this.size; y++) {
