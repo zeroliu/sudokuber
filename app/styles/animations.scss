@@ -26,23 +26,17 @@
   }
 }
 
-@include keyframes(shadowin-black) {
+@include keyframes(win-screen-appear) {
   0% {
-    @include box-shadow(0 0 0 0 #000 inset);
+    opacity: 0;
+    @include transform(scale(.5));
   }
 
   100% {
-    @include box-shadow(0 0 20px 0 #000 inset);
+    opacity: .85;
+    @include transform(scale(1));
   }
 }
 
-@include keyframes(shadowin-uber) {
-  0% {
-    @include box-shadow(0 0 0 0 #1fbad6 inset);
-  }
 
-  100% {
-    @include box-shadow(0 0 20px 0 #1fbad6 inset);
-  }
-}
 

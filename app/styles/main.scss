@@ -101,6 +101,29 @@ body {
   @include box-sizing(border-box);
 }
 
+.win-screen-container {
+  background-color: #000;
+  display: none;
+  height: $field-width;
+  left: 0;
+  opacity: .85;
+  position: absolute;
+  text-align: center;
+  top: 0;
+  width: $field-width;
+  z-index: 10;
+
+  @include border-radius($grid-border-radius);
+  @include animation(win-screen-appear 500ms);
+  
+  h1 {
+    color: #fff;
+    line-height: $field-width;
+    margin: auto;
+    vertical-align: middle;
+  }
+}
+
 .grid-container {
   position: absolute;
   z-index: 1;
@@ -277,6 +300,13 @@ body {
   .btn {
     @include border-radius($game-button-radius);
     font-size: 15px;
+
+    [class^="flaticon-"]:before,
+    [class*=" flaticon-"]:before,
+    [class^="flaticon-"]:after,
+    [class*=" flaticon-"]:after {
+      font-size: 15px;
+    }
   }
 
   .heading {
@@ -295,11 +325,6 @@ body {
     }
   }
 
-  [class^="flaticon-"]:before, [class*=" flaticon-"]:before,
-  [class^="flaticon-"]:after, [class*=" flaticon-"]:after {
-    font-size: 15px;
-  }
-
   .container {
     width: $field-width;
   }
@@ -310,6 +335,16 @@ body {
     padding: $grid-spacing;
     width: $field-width;
     @include border-radius($grid-border-radius);
+  }
+
+  .win-screen-container {
+    height: $field-width;
+    width: $field-width;
+    @include border-radius($grid-border-radius);
+    
+    h1 {
+      line-height: $field-width;
+    }
   }
 
   .grid-row {

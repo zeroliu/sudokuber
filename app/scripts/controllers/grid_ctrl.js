@@ -26,7 +26,7 @@ define(['controllers/ctrl_base', 'views/tile_view', 'views/board_view', 'views/b
                 });
             });
             if (isWin) {
-                // alert('You win!');
+                $('.win-screen-container').css('display', 'block');
             }
         };
 
@@ -117,6 +117,7 @@ define(['controllers/ctrl_base', 'views/tile_view', 'views/board_view', 'views/b
         // Event handlers
         GridCtrl.prototype.onRetryButtonClicked = function() {
             this.removeAllViews();
+            $('.win-screen-container').css('display', 'none');
             this.setup();
         };
 
