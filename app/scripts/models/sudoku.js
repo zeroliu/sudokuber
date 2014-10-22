@@ -20,7 +20,6 @@ define(['models/grid', 'game_generator'], function(Grid, GameGenerator) {
     };
 
     Sudoku.prototype.canWin = function() {
-        console.log('in can win');
         var canWin = true;
         var ctrl = this;
         ctrl.grid.eachSquared(function(xs, ys, squared) {
