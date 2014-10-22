@@ -129,7 +129,9 @@ define(['controllers/ctrl_base', 'models/sudoku', 'views/tile_view', 'views/boar
 
         GameCtrl.prototype.onKeyDown = function(data) {
             if (data >= 1 && data <= 9) {
-                this.model.insertValue(data);
+                if (!this.model.insertValue(data)) {
+                    return;
+                }
                 this.findTileViewByTile(this.model.selectedTile).redraw();
                 this.views.boardView.redraw();
             } else if (data === 0) {
