@@ -29,12 +29,10 @@
 @include keyframes(win-screen-appear) {
   0% {
     opacity: 0;
-    @include transform(scale(.5));
   }
 
   100% {
     opacity: .85;
-    @include transform(scale(1));
   }
 }
 
