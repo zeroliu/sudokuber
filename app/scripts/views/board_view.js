@@ -24,7 +24,30 @@ define(['views/view_base', 'jquery'], function(ViewBase, $) {
         this.isDirty = true;
     };
 
-    //TODO: not duplicate with GridCtrl
+    BoardView.prototype.draw = function() {
+        ViewBase.prototype.draw.call(this);
+        this.cleanBoard();
+        if (this.selectedTilePosition) {
+            this.findTileContainerWithTilePosition(this.selectedTilePosition).addClass('selected');
+            var squared = this.properties.grid.findSquared(this.selectedTilePosition.squared.x, this.selectedTilePosition.squared.y);
+            var tile = squared.findTile(this.selectedTilePosition.tile.x, this.selectedTilePosition.tile.y);
+            if (tile.value) {
+                this.findSameNumberTileContainers(tile.value).forEach(function(container) {
+                    container.addClass('same-number');
+                });
+            } else {
+                this.findHighlightedTileContainers(this.selectedTilePosition).forEach(function(container) {
+                    container.addClass('highlighted');
+                });
+            }
+        }
+    };
+
+    BoardView.prototype.destroy = function() {
+        this.cleanBoard();
+    };
+
+    // Helper methods
     BoardView.prototype.findTileContainerWithTilePosition = function(tilePosition) {
         return this.findTileContainer(tilePosition.squared.x, tilePosition.squared.y, tilePosition.tile.x, tilePosition.tile.y);
     };
@@ -52,7 +75,6 @@ define(['views/view_base', 'jquery'], function(ViewBase, $) {
                 }
             });
         });
-
         return containers;
     };
 
@@ -69,25 +91,6 @@ define(['views/view_base', 'jquery'], function(ViewBase, $) {
         return containers;
     };
 
-    BoardView.prototype.draw = function() {
-        ViewBase.prototype.draw.call(this);
-        this.cleanBoard();
-        if (this.selectedTilePosition) {
-            this.findTileContainerWithTilePosition(this.selectedTilePosition).addClass('selected');
-            var squared = this.properties.grid.findSquared(this.selectedTilePosition.squared.x, this.selectedTilePosition.squared.y);
-            var tile = squared.findTile(this.selectedTilePosition.tile.x, this.selectedTilePosition.tile.y);
-            if (tile.value) {
-                this.findSameNumberTileContainers(tile.value).forEach(function(container) {
-                    container.addClass('same-number');
-                });
-            } else {
-                this.findHighlightedTileContainers(this.selectedTilePosition).forEach(function(container) {
-                    container.addClass('highlighted');
-                });
-            }
-        }
-    };
-
     BoardView.prototype.cleanBoard = function() {
         var view = this;
         view.properties.grid.eachSquared(function(xs, ys, squared) {
@@ -99,10 +102,5 @@ define(['views/view_base', 'jquery'], function(ViewBase, $) {
             });
         });
     };
-
-    BoardView.prototype.destroy = function() {
-        this.cleanBoard();
-    };
-
     return BoardView;
 });

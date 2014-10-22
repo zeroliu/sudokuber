@@ -58,7 +58,6 @@ body {
   @include border-radius($game-button-radius);
 
   &:active {
-    // background-color: #1a879b;
     @include animation(pop 200ms);
   }
 }
@@ -400,7 +399,6 @@ body {
       font-size: 20px;
       line-height: $tile-size;
     }
-
   }
 
   .number-container {
