@@ -53,6 +53,7 @@ body {
   color: #fff;
   font-size: 25px;
   outline: none;
+  text-align: center;
   @include border-radius($game-button-radius);
 
   &:active {
@@ -229,9 +230,9 @@ body {
 
   .number {
     font-size: 40px;
-    position: absolute;
-    top: 50%;
-    @include transform(translate(-50%, -50%));
+    line-height: $tile-size;
+    margin: auto;
+    vertical-align: middle;
 
     &.fixed {
       color: $uber-color;
@@ -396,7 +397,9 @@ body {
   .number-tile {
     .number {
       font-size: 20px;
+      line-height: $tile-size;
     }
+
   }
 
   .number-container {
