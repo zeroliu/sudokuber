@@ -1,5 +1,19 @@
 Game hosted on http://code.xiyuanliu.com/sudokuber
 
+## About game:
+The following features have been implemented:
+- Click on the tile to select
+  * Select an empty tile will highlight the numbers on the same row and column
+  * Select an tile with number will highlight the tiles with same numbers in the board
+- Click on a number button to assign a number to the selected tile
+- Use keyboard number keys to assign numbers
+- Click on the erase button to remove the number
+- Click on the draft button to trigger drafting mode
+- In draft mode, click on a number button to assign a number to the draft, click on that number button again to remove it
+- Use keyboard 'f' button to fill the board
+- Click on restart button to reset the board
+- Winning screen when complete the game
+
 ## About code:
 - structure:  
 ```
