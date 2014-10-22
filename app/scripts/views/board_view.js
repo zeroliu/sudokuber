@@ -71,7 +71,6 @@ define(['views/view_base', 'jquery'], function(ViewBase, $) {
 
     BoardView.prototype.draw = function() {
         ViewBase.prototype.draw.call(this);
-        console.log('draw board');
         this.cleanBoard();
         if (this.selectedTilePosition) {
             this.findTileContainerWithTilePosition(this.selectedTilePosition).addClass('selected');

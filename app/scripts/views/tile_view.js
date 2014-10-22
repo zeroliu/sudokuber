@@ -14,7 +14,6 @@ define(['views/view_base', 'jquery'], function(ViewBase, $) {
     TileView.prototype.draw = function() {
         var view = this;
         ViewBase.prototype.draw.call(this);
-        console.log('draw tile');
         if (this.element) {
             this.element.remove();
         }

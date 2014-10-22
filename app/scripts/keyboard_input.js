@@ -28,12 +28,13 @@ define(['jquery'], function($) {
     KeyboardInput.prototype.listen = function() {
         var manager = this;
         var ZERO_KEYCODE = 48;
+        var F_KEYCODE = 70;
 
         $('body').on('keydown', function(event) {
             var keyCodeDiff = event.keyCode - ZERO_KEYCODE;
             if (keyCodeDiff >= 1 && keyCodeDiff <= 9) {
                 manager.triggerEvent('keyDown', keyCodeDiff);
-            } else {
+            } else if (event.keyCode === F_KEYCODE) {
                 manager.triggerEvent('keyDown', 0);
             }
         });
